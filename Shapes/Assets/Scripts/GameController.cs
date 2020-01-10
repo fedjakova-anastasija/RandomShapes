@@ -98,11 +98,11 @@ public class GameController : MonoBehaviour
     private void ShowEndLevelText(LEVEL_STATE state)
     {
         string endLevelText = props.winText[Random.Range(0, props.loseText.Capacity)];
-        Color endLevelColor = Color.green;
+        Color endLevelColor = props.winColor;
         if (state != LEVEL_STATE.WIN)
         {
             endLevelText = props.loseText[Random.Range(0, props.loseText.Capacity)];
-            endLevelColor = Color.black;
+            endLevelColor = props.loseColor;
         }
         UI.ShowEndLevelText(endLevelText, endLevelColor);
     }

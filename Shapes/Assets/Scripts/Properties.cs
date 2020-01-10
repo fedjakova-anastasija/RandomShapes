@@ -10,6 +10,9 @@ public class Properties : MonoBehaviour
     public AudioSource winSound;
     public AudioSource loseSound;
 
+    public Color winColor;
+    public Color loseColor;
+
     public List<string> winText;
     public List<string> loseText;
 
