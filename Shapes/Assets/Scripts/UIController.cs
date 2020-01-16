@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     public GameObject timerObject;
+    public GameObject timerObjectPanel;
     public GameObject circleButton;
     public GameObject cubeButton;
     public GameObject cylinderButton;
     public GameObject endLevelText;
+    public GameObject endLevelTextPanel;
     public GameObject currentLevelText;
+    public GameObject currentLevelTextPanel;
     private Properties props;
     private GameController gameController;
 
@@ -25,23 +28,31 @@ public class UIController : MonoBehaviour
         timerObject.SetActive(true);
         circleButton.SetActive(true);
         cubeButton.SetActive(true);
-        endLevelText.SetActive(false);        
-        if(props.GetCurrentLevelShapeTypesCount(gameController.GetDifficultyLevel()) == 3)
+        endLevelText.SetActive(false);
+        endLevelTextPanel.SetActive(false);
+        currentLevelTextPanel.SetActive(false);
+        timerObjectPanel.SetActive(false);
+        circleButton.GetComponent<Button>().enabled = true;
+        cubeButton.GetComponent<Button>().enabled = true;
+        if (props.GetCurrentLevelShapeTypesCount(gameController.GetDifficultyLevel()) == 3)
         {
             cylinderButton.SetActive(true);
+            cylinderButton.GetComponent<Button>().enabled = true;
         }
     }
 
     public void ResetUI()
     {
         timerObject.SetActive(false);
-        circleButton.SetActive(false);
-        cubeButton.SetActive(false);
-        cylinderButton.SetActive(false);
+        timerObjectPanel.SetActive(false);
+        circleButton.GetComponent<Button>().enabled = false;
+        cubeButton.GetComponent<Button>().enabled = false;
+        cylinderButton.GetComponent<Button>().enabled = false;
     }
 
     public void ShowEndLevelText(string text, Color color)
     {
+        endLevelTextPanel.SetActive(true);
         endLevelText.SetActive(true);
         endLevelText.GetComponent<Text>().text = text;
         endLevelText.GetComponent<Text>().color = color;
@@ -54,11 +65,13 @@ public class UIController : MonoBehaviour
 
     public void UpdateTimer(int timerValue)
     {
+        timerObjectPanel.SetActive(true);
         timerObject.GetComponent<Text>().text = timerValue.ToString();
     }
 
     public void UpdateCurrentLevelText(int currentLevel)
     {
+        currentLevelTextPanel.SetActive(true);
         currentLevelText.GetComponent<Text>().text = string.Format("Level {0}", currentLevel.ToString());
     }
 }

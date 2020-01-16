@@ -71,15 +71,76 @@ public class GameController : MonoBehaviour
     {
         gameCreator.DestroyShapes();
     }
+
+    private void AddRigidbody(GameObject obj)
+    {
+        obj.AddComponent<Rigidbody>();
+    }
+
+    private void DropAllShapes()
+    {
+        GameObject[] spheres = GameObject.FindGameObjectsWithTag("Sphere");
+        GameObject[] cubes = GameObject.FindGameObjectsWithTag("Cube");
+        GameObject[] cylinders = GameObject.FindGameObjectsWithTag("Cylinder");
+        foreach(var sphere in spheres)
+        {
+            AddRigidbody(sphere);
+        }foreach(var cube in cubes)
+        {
+            AddRigidbody(cube);
+        }foreach(var cylinder in cylinders)
+        {
+            AddRigidbody(cylinder);
+        }
+        
+    }
+
+    private void DestroyAll(GameObject[] objects)
+    {
+        foreach(var obj in objects)
+        {
+            Destroy(obj);
+        }
+    }
+
+    private void DisableIncorrectShapes(string tag)
+    {
+        GameObject[] spheres = GameObject.FindGameObjectsWithTag("Sphere");
+        GameObject[] cubes = GameObject.FindGameObjectsWithTag("Cube");
+        GameObject[] cylinders = GameObject.FindGameObjectsWithTag("Cylinder");
+
+        if(tag == "Sphere")
+        {
+            DestroyAll(cubes);
+            DestroyAll(cylinders);
+        }
+        if(tag == "Cube")
+        {
+            DestroyAll(spheres);
+            DestroyAll(cylinders);
+        }
+        if (tag == "Cylinder")
+        {
+            DestroyAll(spheres);
+            DestroyAll(cubes);
+        }
+
+    }
+
     private int uiLevel = 1;
     private void EndLevelActions(LEVEL_STATE state)
     {
+        if(state == LEVEL_STATE.LOSE)
+        {
+            DropAllShapes();
+        }
         if (state == LEVEL_STATE.WIN)
         {
             difficultyLevel++;
             uiLevel++;
             if (difficultyLevel > props.maxDifficultyLevel) difficultyLevel = props.maxDifficultyLevel;
         }
+
         ShowEndLevelText(state);
         PlayEndLevelSound(state);
         StartCoroutine(NextLevel());
@@ -112,13 +173,13 @@ public class GameController : MonoBehaviour
         SetGameStarted(false);
         ResetUI();
         StopTimer();
-        DestroyAllShapes();
-        EndLevelActions(state);
+        EndLevelActions(state);        
     }
 
     IEnumerator NextLevel()
     {
         yield return new WaitForSeconds(5);
+        DestroyAllShapes();
         InitializeUI();
         ConfigureTimer();
         CreateShapes();
@@ -141,6 +202,7 @@ public class GameController : MonoBehaviour
         if(keyOfMaxValue == shapeTag)
         {
             EndLevel(LEVEL_STATE.WIN);
+            DisableIncorrectShapes(shapeTag);
         }
         else
         {

@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/fedia/Desktop/Masha/Новая папка/RandomShapes.apk
+C:/Users/fedia/Desktop/RandomShapes.apk
 SceneListBegin?
 Assets/Scenes/SampleScene.unity
 SceneListEnd?
@@ -227,7 +227,7 @@ dff7a11839abb9fb7222280cf3c0a95a VuforiaScripts.dll:.DefaultModelRecoEventHandle
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GameController
 5c56aa35a44b3c0e212b7c9ae1cb0983 Assembly-CSharp.dll:.GameSceneCreator
-d819fed188cd497d419b14852855e209 Assembly-CSharp.dll:.UIController
+56c8ae145c38308a784e049a6e9df1e5 Assembly-CSharp.dll:.UIController
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.CustomTrackableEventHandler
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.RotationAround
